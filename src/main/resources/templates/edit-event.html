@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Event</title>
+</head>
+<body>
+
+<h2>Edit Event</h2>
+
+<form th:action="@{/events/update}"
+      th:object="${event}"
+      method="post">
+
+    <input type="hidden" th:field="*{id}" />
+
+    <input type="text"
+           th:field="*{title}"
+           placeholder="Title" />
+
+    <input type="date"
+           th:field="*{date}" />
+
+    <input type="text"
+           th:field="*{location}"
+           placeholder="Location" />
+
+    <button type="submit">Update</button>
+
+</form>
+
+<br>
+
+<a href="/dashboard">Back</a>
+
+</body>
+</html>
