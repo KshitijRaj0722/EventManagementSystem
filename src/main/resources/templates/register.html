@@ -11,15 +11,16 @@
 
 <form th:action="@{/register}" th:object="${user}" method="post">
 
-    <input type="text" th:field="*{name}" placeholder="Name" required />
+    <input type="text" th:field="*{name}" placeholder="Name" />
 
-    <input type="text" th:field="*{username}" placeholder="Username" required />
+    <input type="email" th:field="*{email}" placeholder="Email" />
 
-    <input type="password" th:field="*{password}" placeholder="Password" required />
+    <input type="password" th:field="*{password}" placeholder="Password" />
 
     <button type="submit">Register</button>
 
 </form>
+
 
 
 

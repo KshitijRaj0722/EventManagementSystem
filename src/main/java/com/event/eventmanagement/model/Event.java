@@ -1,7 +1,6 @@
 package com.event.eventmanagement.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
 
 @Entity
 @Table(name = "events")
@@ -12,15 +11,12 @@ public class Event {
     private Long id;
 
     private String title;
-
-    private String description;
-
     private String location;
+    private String date;
 
-    private LocalDate date;
+    public Event() {}
 
-    // Getters & Setters
-
+    // ID
     public Long getId() {
         return id;
     }
@@ -29,6 +25,7 @@ public class Event {
         this.id = id;
     }
 
+    // TITLE
     public String getTitle() {
         return title;
     }
@@ -37,14 +34,7 @@ public class Event {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
+    // LOCATION
     public String getLocation() {
         return location;
     }
@@ -53,11 +43,12 @@ public class Event {
         this.location = location;
     }
 
-    public LocalDate getDate() {
+    // DATE
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 }
