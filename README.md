@@ -73,7 +73,13 @@ cd backend
 - **Repository** — `@DataJpaTest`: search/filter query, reminder window, DB constraints
 
 ## Deployment
-- **Backend** → Render (`backend/Dockerfile` + `backend/render.yaml`); set `DB_*`,
-  `JWT_SECRET` and `CORS_ORIGINS` (your deployed frontend URL). Health check: `/actuator/health`.
-- **Frontend** → Vercel or Netlify; set `VITE_API_URL` to the deployed backend URL.
-  SPA fallbacks are provided by `vercel.json` / `netlify.toml`.
+- **Backend** → Render. The `render.yaml` Blueprint at the repo root provisions a
+  PostgreSQL database and the Dockerized API (`backend/Dockerfile`) and wires the
+  `DB_*` vars automatically. After the frontend is live, set `CORS_ORIGINS` to its
+  URL. Health check: `/actuator/health`.
+- **Frontend** → Vercel or Netlify. **Set the project's root directory to `frontend`**
+  (this is a monorepo), and set `VITE_API_URL` to the deployed backend URL.
+  SPA fallbacks come from `frontend/vercel.json` / `frontend/netlify.toml`.
+
+The backend must be deployed first, so you have its URL for `VITE_API_URL`; then set
+`CORS_ORIGINS` on the backend to the frontend's URL.

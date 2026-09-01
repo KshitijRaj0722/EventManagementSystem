@@ -71,4 +71,15 @@ App starts on `http://localhost:8081` (override with `PORT`). On first run it se
 | PUT | `/api/admin/registrations/{id}/attendance?attended=` | admin | Mark attendance |
 
 ## Deployment (Render)
-A `Dockerfile` and `render.yaml` are included. Create a Render **Web Service** from this repo (Docker runtime), set `DB_URL`, `DB_USERNAME`, `DB_PASSWORD`, `CORS_ORIGINS` (your deployed frontend URL) and `JWT_SECRET`. Health check path: `/actuator/health`.
+This folder holds the `Dockerfile`; the Render Blueprint lives at the **repository root**
+(`../render.yaml`) because Render only looks for `render.yaml` there.
+
+Easiest path — Render dashboard → **New → Blueprint** → pick this repo. That provisions the
+PostgreSQL database and the web service together and injects `DB_HOST` / `DB_PORT` / `DB_NAME` /
+`DB_USERNAME` / `DB_PASSWORD` plus a generated `JWT_SECRET`. The only value you set by hand is
+`CORS_ORIGINS` (your deployed frontend URL).
+
+To wire it up manually instead, create a **Web Service** with runtime *Docker*, Dockerfile path
+`./backend/Dockerfile`, Docker context `./backend`, health check `/actuator/health`, and set
+`DB_URL` (or `DB_HOST`/`DB_PORT`/`DB_NAME`), `DB_USERNAME`, `DB_PASSWORD`, `JWT_SECRET` and
+`CORS_ORIGINS`.

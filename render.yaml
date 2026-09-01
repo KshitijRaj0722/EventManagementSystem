@@ -1,6 +1,9 @@
-# Render Blueprint: provisions a free PostgreSQL database + the Dockerized backend,
+# Render Blueprint: provisions a PostgreSQL database + the Dockerized backend,
 # and wires the DB connection into the web service automatically.
 # Deploy via Render dashboard → New → Blueprint → select this repo.
+#
+# This file must live at the REPOSITORY ROOT (Render only looks for it here),
+# so the Docker paths below are relative to the root, not to backend/.
 databases:
   - name: eventhub-db
     plan: free
@@ -12,7 +15,8 @@ services:
     name: eventhub-backend
     runtime: docker
     plan: free
-    dockerfilePath: ./Dockerfile
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
     healthCheckPath: /actuator/health
     envVars:
       - key: SPRING_PROFILES_ACTIVE
