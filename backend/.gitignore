@@ -1,0 +1,10 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+.idea/
+*.iml
+*.log
+.DS_Store
+.env
+
+# Local dev secrets (never commit)
+src/main/resources/application-local.properties

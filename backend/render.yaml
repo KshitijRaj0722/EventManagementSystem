@@ -1,0 +1,49 @@
+# Render Blueprint: provisions a free PostgreSQL database + the Dockerized backend,
+# and wires the DB connection into the web service automatically.
+# Deploy via Render dashboard → New → Blueprint → select this repo.
+databases:
+  - name: eventhub-db
+    plan: free
+    databaseName: eventhubdb
+    user: eventhub
+
+services:
+  - type: web
+    name: eventhub-backend
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: PORT
+        value: 8081
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DB_HOST
+        fromDatabase:
+          name: eventhub-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: eventhub-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: eventhub-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: eventhub-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: eventhub-db
+          property: password
+      # Set this to your deployed Vercel URL after the frontend is live, e.g.
+      # https://event-management-frontend.vercel.app
+      - key: CORS_ORIGINS
+        sync: false
+      - key: MAIL_ENABLED
+        value: false

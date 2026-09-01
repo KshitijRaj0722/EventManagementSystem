@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.vercel/
+*.log
+.DS_Store
+
+# Local API URL — do not commit; set VITE_API_URL in Vercel/Netlify instead.
+.env
+.env.local
+.env.*.local

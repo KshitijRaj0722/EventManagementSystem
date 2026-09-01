@@ -1,0 +1,25 @@
+# ---- Java / Maven (backend) ----
+target/
+*.jar
+!.mvn/wrapper/maven-wrapper.jar
+
+# ---- Node / Vite (frontend) ----
+node_modules/
+dist/
+.vercel/
+
+# ---- Secrets & local config (never commit) ----
+.env
+.env.local
+.env.*.local
+**/application-local.properties
+
+# ---- Editors / OS ----
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# ---- Logs ----
+*.log
